@@ -1,339 +1,90 @@
+//create a todo app is used to add the text and remove the text using the diffeerent widget
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
+}
+//stateful widget
+class MainApp extends StatefulWidget {
+  @override
+  State<MainApp> createState() => _MainAppState();
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class _MainAppState extends State<MainApp> {
+  String displayText = "No Text Data";
+
+  List<String> taskList = [];
+//taskcontroller to control the task
+  TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Restaurant Menu"),
-          backgroundColor: Colors.orange,
+          title: Text("Todo List App"),
+          backgroundColor: Colors.blue,
           centerTitle: false,
         ),
-        body: ListView (
+        body: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: textController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text("Enter a task"),
+                      ),
+                    ),
                   ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Chicken Noodles",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+
+                MaterialButton(
+                  color: Colors.white,
+                  height: 50,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  Text("Delicious chicken noodles with spicy"),
-                  Text("60.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
+                  onPressed: () {
+                    setState(() {
+                      taskList.add(textController.text);
+                      textController.clear();
+                    });
+                  },
+                  child: Text("Add"),
+                ),
+              ],
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Biryani",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("Aromatic rice dish with spiced meats or vegetables"),
-                  Text("260.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Naan",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("Soft, leavened flatbread baked in a tandoor oven"),
-                  Text("40.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Samosa",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("Fried pastry with a savory spiced filling, typically potatoes and peas"),
-                  Text("20.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Dosa",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("South Indian crepe made from a fermented rice and lentil batter"),
-                  Text("60.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Butter Chicken",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("Chicken pieces simmered in a creamy, spiced tomato sauce"),
-                  Text("350.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Paneer",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("ndian cheese, often served in a rich, spiced gravy like Paneer Butter Masala"),
-                  Text("190.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    " Dal",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("A comforting dish made from simmered lentils or split peas."),
-                  Text("160.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "idli",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text(" Steamed, savory cakes made from a fermented rice and lentil batter"),
-                  Text("50.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Chaat",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("A broad term for savory Indian street food snacks, often with crispy components and chutneys"),
-                  Text("70.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                    color: Colors.black26,
-                  ),
-                ],
-              ),
-              height: 90,
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Jalebi",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text("Sweet, spiral-shaped fried batter soaked in sugar syrup"),
-                  Text("50.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
+//use the expanded widget or otherwise use the flexiable widget with shrinkwrap is true
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: taskList.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(taskList[index]),
+                        ),
+                      ),
+                      MaterialButton(
+                        child: Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          setState(() {
+                            taskList.removeAt(index);
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],
